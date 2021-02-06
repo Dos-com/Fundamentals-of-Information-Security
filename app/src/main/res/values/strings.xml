@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fundamentals_of_Information_Security_Project</string>
+    <string name="empty_key_word">Please, enter *Key* for encode *Plain Text* </string>
+    <string name="empty_plain_text">Please, enter *Plain Text* for continue</string>
+</resources>

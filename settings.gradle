@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "Fundamentals_of_Information_Security_Project"
