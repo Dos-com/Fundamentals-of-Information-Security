@@ -20,7 +20,7 @@ public class CipherLab {
     private CipherLab(Context context){
         mMyCiphers = new ArrayList<>();
 
-        mMyCiphers.add(new MyCipher("Blowfish"));
+        mMyCiphers.add(new MyCipher("RSA"));
     }
 
 

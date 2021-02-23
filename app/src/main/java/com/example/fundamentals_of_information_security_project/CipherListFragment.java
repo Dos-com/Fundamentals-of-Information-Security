@@ -1,11 +1,14 @@
 package com.example.fundamentals_of_information_security_project;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +24,30 @@ public class CipherListFragment extends Fragment {
     private RecyclerView mCipherRecyclerView;
     private CipherAdapter mCipherAdapter;
     private UUID updateCipherId;
+
+    public static final int REQUEST_PLAIN_TEXT = 0;
+
+    public static final String DIALOG_PLAIN_TEXT = "plain_text";
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode != Activity.RESULT_OK){
+            return;
+        }
+
+        if (requestCode == REQUEST_PLAIN_TEXT){
+            String plain_text = (String) data.getSerializableExtra(InputPlainTextFragment.EXTRA_PLAIN_TEXT);
+            RSA rsa = new RSA();
+
+            ResultCipherFragment resultCipherFragment =ResultCipherFragment.newInstanceRSA(rsa, plain_text);
+
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container,resultCipherFragment)
+                    .addToBackStack("ResultCipherFragment")
+                    .commit();
+
+        }
+    }
 
     @Nullable
     @Override
@@ -68,14 +95,11 @@ public class CipherListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            Fragment fragment = fragmentManager.findFragmentById(R.id.blowfish_input_data_fragment);
-            if (fragment == null) {
-                fragment = BlowfishInputDataFragment.newInstance();
-
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .commit();
+            FragmentManager fragmentManager = getFragmentManager();
+            if (mMyCipher.getName().equals("RSA")){
+                InputPlainTextFragment dialog =InputPlainTextFragment.newInstance();
+                dialog.setTargetFragment(CipherListFragment.this, REQUEST_PLAIN_TEXT);
+                dialog.show(fragmentManager, DIALOG_PLAIN_TEXT);
             }
         }
 
