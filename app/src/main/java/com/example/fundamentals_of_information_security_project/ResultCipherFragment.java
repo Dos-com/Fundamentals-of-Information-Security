@@ -35,14 +35,14 @@ public class ResultCipherFragment extends Fragment {
     }
 
 
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d("TAG", "onCreate: wwwwwwwwwwwwwwwwwwwwwwwwwwwww ");
 
         if (getArguments().getSerializable(ARG_RSA) != null){
-            Log.d("TAG", "onCreate: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ");
             mRSA = (RSA) getArguments().getSerializable(ARG_RSA);
             mPlainText = (String) getArguments().getSerializable(ARG_PLAIN_TEXT);
         }
@@ -61,26 +61,28 @@ public class ResultCipherFragment extends Fragment {
         mDecryptedTextBytesEditText = view.findViewById(R.id.decrypted_text_bytes);
 
         if (mRSA !=null){
-            Log.d("TAG", "onCreateView: rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
 
             mPlainTextEditText.setText(mPlainText);
             mEncryptedTextEditText.setEnabled(false);
 
+
             byte[] encrypted = mRSA.encrypt(mPlainText.getBytes());
             mEncryptedTextBytesEditText.setText(bytesToString(encrypted));
 
-            mEncryptedTextEditText.setText(new String(encrypted));
+            mEncryptedTextEditText.setText(bytesToStringChar(encrypted));
 
 
             byte[] decrypted = mRSA.decrypt(encrypted);
             mDecryptedTextBytesEditText.setText(bytesToString(decrypted));
 
-            mDecryptedTextEditText.setText(new String(decrypted));
+            mDecryptedTextEditText.setText(bytesToStringChar(decrypted));
 
         }
 
         return view;
     }
+
+
 
     private static String bytesToString(byte[] encrypted)
     {
@@ -91,4 +93,18 @@ public class ResultCipherFragment extends Fragment {
         }
         return test;
     }
+
+
+
+    private static String bytesToStringChar(byte[] encrypted)
+    {
+        String test = "";
+        for (byte b : encrypted)
+        {
+            test += (char)b;
+        }
+        return test;
+    }
+
+
 }

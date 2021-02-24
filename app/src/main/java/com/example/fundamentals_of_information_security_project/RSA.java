@@ -39,26 +39,6 @@ public class RSA implements Serializable {
         this.N = N;
     }
 
-//    @SuppressWarnings("deprecation")
-//    public static void main(String[] args) throws IOException
-//    {
-//        RSA rsa = new RSA();
-//        DataInputStream in = new DataInputStream(System.in);
-//        String teststring;
-//        System.out.println("Enter the plain text:");
-//        teststring = in.readLine();
-//        System.out.println("Encrypting String: " + teststring);
-//        System.out.println("String in Bytes: "
-//                + bytesToString(teststring.getBytes()));
-//        // encrypt
-//        byte[] encrypted = rsa.encrypt(teststring.getBytes());
-//        // decrypt
-//        System.out.println("Encrypted String: "+bytesToString(encrypted));
-//        byte[] decrypted = rsa.decrypt(encrypted);
-//        System.out.println("Decrypting Bytes: " + bytesToString(decrypted));
-//        System.out.println("Decrypted String: " + new String(decrypted));
-//    }
-
 
 
     // Encrypt message

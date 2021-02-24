@@ -42,9 +42,9 @@ public class CipherListFragment extends Fragment {
             ResultCipherFragment resultCipherFragment =ResultCipherFragment.newInstanceRSA(rsa, plain_text);
 
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container,resultCipherFragment)
-                    .addToBackStack("ResultCipherFragment")
+                    .replace(R.id.fragment_container,resultCipherFragment, "ResultCipherFragment")
                     .commit();
+
 
         }
     }
@@ -70,9 +70,9 @@ public class CipherListFragment extends Fragment {
         CipherLab cipherLab = CipherLab.get(getActivity());
         List<MyCipher> myCiphers = cipherLab.getMyCiphers();
 
-        Log.d("TAG", "updateUI: ssssssssssssssssssssssssssssssssssssssss"+myCiphers.size()+" name "+myCiphers.get(0).getName());
 
         if (mCipherAdapter == null) {
+
             mCipherAdapter = new CipherAdapter(myCiphers);
             mCipherRecyclerView.setAdapter(mCipherAdapter);
         } else if (updateCipherId != null) {

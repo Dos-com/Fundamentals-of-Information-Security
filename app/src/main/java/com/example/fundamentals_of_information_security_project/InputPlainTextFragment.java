@@ -38,7 +38,6 @@ public class InputPlainTextFragment extends DialogFragment {
 
         mPlainTextTextView = view.findViewById(R.id.plain_text);
 
-        Log.d("TAG", "onCreateDialog: qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq "+mPlainTextTextView.getText());
 
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
